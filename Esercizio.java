@@ -1,26 +1,111 @@
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
+import java.util.*;
+import java.lang.Math;
 
-//Import di Classi Java necessarie al funzionamento del programma
-import java.util.Scanner;
+class Program {
+    private static Random random = new Random();
+    private static Scanner input = new Scanner(System.in);
 
-// Classe principale, con metodo main
-class Esercizio {
-    // Il programma parte con una chiamata a main().
-    public static void main(String args[])
-    {
-        //Variabili del programma
-        String nome;
+    public static void main(String[] args) {
+        int n, ns0, ns1, ns2;
 
-        //Creo l'oggetto in per l'input da tastiera
-        Scanner in = new Scanner( System.in );
+        n = input.nextInt();
+        int[] v = new int[n];
 
-        //Leggo l'input da tastiera
-        System.out.print("Inserisci il tuo nome: ");
-        nome = in.nextLine();
+        riempi(v, n);
+        ns0 = 0;
+        ns1 = 0;
+        ns2 = 0;
+        ns0 = bublesort0(v, n, ns0);
+        ns1 = bublesort0(v, n, ns1);
+        ns2 = bublesort0(v, n, ns2);
+    }
+    
+    public static int bublesort0(int[] v, int n, int ns) {
+        int i, j, y;
 
-        //Output del nome acquisito da tastiera
-        System.out.println("Ciao "+nome+"!");
+        for (i = 0; i <= n - 1; i++) {
+            j = 0;
+            while (j <= n - 2) {
+                if (v[j] > v[j + 1]) {
+                    y = v[j];
+                    v[j] = v[j + 1];
+                    v[j + 1] = y;
+                    ns = ns + 1;
+                }
+                j = j + 1;
+            }
+        }
+        
+        return ns;
+    }
+    
+    public static int bublesort1(int[] v, int n, int ns) {
+        int i, j, y;
+
+        for (i = 0; i <= n - 1; i++) {
+            j = 0;
+            while (j <= n - 2 - i) {
+                if (v[j] > v[j + 1]) {
+                    y = v[j];
+                    v[j] = v[j + 1];
+                    v[j + 1] = y;
+                    ns = ns + 1;
+                }
+                j = j + 1;
+            }
+        }
+        
+        return ns;
+    }
+    
+    public static int bublesort2(int[] v, int n, int ns) {
+        int i, j, y;
+
+        i = 0;
+        boolean sc;
+
+        sc = true;
+        while (i <= n - 1 && sc) {
+            j = 0;
+            sc = false;
+            while (j <= n - 2 - i) {
+                if (v[j] > v[j + 1]) {
+                    y = v[j];
+                    v[j] = v[j + 1];
+                    v[j + 1] = y;
+                    sc = true;
+                    ns = ns + 1;
+                }
+                j = j + 1;
+            }
+            i = i + 1;
+        }
+        
+        return ns;
+    }
+    
+    public static void numeroScambi(int ns0, int ns1, int ns2) {
+        if (ns0 > ns1) {
+            if (ns0 > ns2) {
+                System.out.println("maggiore : ns0");
+            } else {
+                System.out.println("maggiore : ns2");
+            }
+        } else {
+            if (ns1 > ns2) {
+                System.out.println("maggiore : ns1 ");
+            } else {
+                System.out.println("maggiore : ns2");
+            }
+        }
+    }
+    
+    public static void riempi(int[] v, int n) {
+        int i, r;
+
+        r = n * 10;
+        for (i = 0; i <= n - 1; i++) {
+            v[i] = random.nextInt(r);
+        }
     }
 }
-
-//LEGGERE LE ISTRUZIONI NEL FILE README.md
